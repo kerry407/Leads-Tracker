@@ -3,7 +3,6 @@ const input = document.querySelector("input#input-el");
 const saveButton = document.querySelector("button#save-btn");
 const linkBody = document.querySelector("ul#link-body");
 const deleteButton = document.querySelector("button#delete-btn");
-const listItem = document.querySelectorAll("ul li");
 
 
 const setMultipleAttrs = ( el, obj ) => {
@@ -23,19 +22,19 @@ const storeLeads = ( ul ) => {
 
 const leadsFromStorage = JSON.parse(localStorage.getItem("leads"));
 
-const renderLeads = () => {
-    let innerLeadsHTML = "";
-    for (let i = 0; i < leadsFromStorage.length; i++) {
-        innerLeadsHTML += `
-                            <li><a href=${leadsFromStorage[i]} target=_blank >${leadsFromStorage[i]}</a></li>
+const render = ( store ) => {
+    let innerStoreHTML = "";
+    for (let i = 0; i < store.length; i++) {
+        innerStoreHTML += `
+                            <li><a href=${store[i]} target=_blank >${store[i]}</a></li>
                           `
     }
-    linkBody.innerHTML = innerLeadsHTML;
+    linkBody.innerHTML = innerStoreHTML;
 }
 
 
 if ( leadsFromStorage ) {
-    renderLeads();
+    render( leadsFromStorage );
 }   
 
 saveButton.addEventListener( "click", () => {
@@ -51,9 +50,10 @@ saveButton.addEventListener( "click", () => {
 });
 
 
-
 deleteButton.addEventListener( "dblclick", () => {
     localStorage.clear();
     linkBody.innerHTML = "";
 
 })
+
+
